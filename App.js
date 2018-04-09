@@ -19,6 +19,7 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
+//Test
 type Props = {};
 export default class App extends Component<Props> {
   render() {
