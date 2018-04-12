@@ -12,6 +12,8 @@ import {
   View
 } from 'react-native';
 
+import {Triangle} from './Triangle'
+
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',
@@ -20,10 +22,25 @@ const instructions = Platform.select({
 });
 
 //Test
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      top: 100,
+      left: 50
+    }
+    setInterval(() => {
+      console.log("called");
+      this.setState( 
+        {top: this.state.top-.5}
+      );
+    },30);
+  }
+
   render() {
+    console.log(this.state)
     return (
+      
       <View style={styles.container}>
         <Text style={styles.welcome}>
           Welcome to React Native!
@@ -34,7 +51,10 @@ export default class App extends Component<Props> {
         <Text style={styles.instructions}>
           {instructions}
         </Text>
+        <View style={[styles.triangleCorner, this.props.style]} />
+        <Triangle top={this.state.top} left={50}/>
       </View>
+      
     );
   }
 }
@@ -55,5 +75,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
-  },
+  }
 });
