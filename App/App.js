@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 
 import {Triangle} from './Triangle'
+import {Rectangle} from './Rectangle'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -53,6 +54,7 @@ export default class App extends Component {
         </Text>
         <View style={[styles.triangleCorner, this.props.style]} />
         <Triangle top={this.state.top} left={50}/>
+        <Rectangle />
       </View>
       
     );

@@ -1,31 +1,28 @@
 import React, { Component } from 'react';
 import {
     View,
-    StyleSheet
+    StyleSheet,
+    Dimensions
 } from 'react-native';
 
 import Svg,{
-    Circle,
-    Ellipse,
-    G,
-    LinearGradient,
-    RadialGradient,
-    Line,
-    Path,
     Polygon,
-    Polyline,
-    Rect,
-    Symbol,
-    Text,
-    Use,
-    Defs,
-    Stop
 } from 'react-native-svg';
 
+var {height, width} = Dimensions.get('window');
+
 export class Triangle extends Component{
+    
     render(){
+        console.log(height);
+        console.log(width);
         return(
             <Svg
+                style= {{
+                    position: 'absolute',
+                    top:this.height,
+                    left:50
+                }}
                 height="100"
                 width="100"
             >
@@ -40,7 +37,7 @@ export class Triangle extends Component{
     }
 }
 
-const styles = StyleSheet.create({
+/* const styles = StyleSheet.create({
     triangleCorner: {
         width: 0,
         height: 0,
@@ -52,3 +49,4 @@ const styles = StyleSheet.create({
         borderTopColor: 'red'
       },
 })
+*/
