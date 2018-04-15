@@ -14,17 +14,15 @@ var {height, width} = Dimensions.get('window');
 export class Triangle extends Component{
     
     render(){
-        console.log(height);
-        console.log(width);
         return(
             <Svg
                 style= {{
                     position: 'absolute',
-                    top:this.height,
-                    left:50
+                    top:this.props.top + this.props.move,
+                    left:this.props.left,
                 }}
-                height="100"
-                width="100"
+                width={this.props.width}
+                height={this.props.height}
             >
                 <Polygon
                     points="40,5 70,80 25,95"

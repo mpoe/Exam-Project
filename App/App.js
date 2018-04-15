@@ -9,52 +9,46 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native';
 
-import {Triangle} from './Triangle'
-import {Rectangle} from './Rectangle'
+import {Triangle} from './Triangle';
+import {Rectangle} from './Rectangle';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import Svg from 'react-native-svg';
+//import Interaction from './Interaction';
 
-//Test
+
+
 export default class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      top: 100,
-      left: 50
+      move: 0
     }
-    setInterval(() => {
-      console.log("called");
+    var move = setInterval(() => {
       this.setState( 
-        {top: this.state.top-.5}
+        {move: this.state.move+5}
       );
     },30);
   }
+  
 
   render() {
-    console.log(this.state)
+    let shapes = [
+      <Triangle height={100} width={100} top={-200} left={40} move={this.state.move} />,
+      <Triangle height={100} width={100} top={-400} left={40} move={this.state.move} />,
+      <Rectangle height={100} width={100} top={-600} left={40} move={this.state.move}/>,
+    ]
+    let shapeList = shapes.map((shape, key) => (
+      shape
+    ))
     return (
       
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-        <View style={[styles.triangleCorner, this.props.style]} />
-        <Triangle top={this.state.top} left={50}/>
-        <Rectangle />
+        
+        {shapeList}
       </View>
       
     );
@@ -64,18 +58,11 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'red',
+    width:'100%',
+    height:'100%',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  }
 });
