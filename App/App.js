@@ -19,6 +19,7 @@ import {Rectangle} from './Rectangle';
 import Svg from 'react-native-svg';
 //import Interaction from './Interaction';
 
+import {Player} from './Player';
 
 
 export default class App extends Component {
@@ -27,11 +28,13 @@ export default class App extends Component {
     this.state = {
       move: 0
     }
+    /*
     var move = setInterval(() => {
       this.setState( 
         {move: this.state.move+5}
       );
     },30);
+    */
   }
   
 
@@ -47,8 +50,8 @@ export default class App extends Component {
     return (
       
       <View style={styles.container}>
-        
-        {shapeList}
+        {/*shapeList*/}
+        <Player/>
       </View>
       
     );
@@ -61,7 +64,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'red',
     width:'100%',
     height:'100%',
   },
