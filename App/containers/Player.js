@@ -21,14 +21,12 @@ export class Player extends Component{
 
     };
     render(){
-        console.log("renderplayer")
-        console.log(Dimensions.get('window'))
         return(
             <Svg 
                 style= {{
                     position: 'absolute',
                     top:Dimensions.get('window').height-(this.state.size)*3,
-                    left:0,
+                    left:this.props.position,
                 }}
                 height={this.state.size*2}
                 width={this.state.size*2}

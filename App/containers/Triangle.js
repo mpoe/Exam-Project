@@ -18,7 +18,7 @@ export class Triangle extends Component{
             <Svg
                 style= {{
                     position: 'absolute',
-                    top:this.props.top + this.props.move,
+                    top:this.props.top,
                     left:this.props.left,
                 }}
                 width={this.props.width}
