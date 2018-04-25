@@ -10,7 +10,11 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  Easing,
+  Animated,
+  Dimensions,
+  Image
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -29,10 +33,11 @@ import { player } from '../redux/reducers/player';
 class GameWrapper extends Component {
   constructor(props){
     super(props);
-
     this.state = {
       move: 0,
+      animatedValue: new Animated.Value(0)
     }
+    /*
     var move = setInterval(() => {
       this.setState( 
         {
@@ -41,17 +46,43 @@ class GameWrapper extends Component {
         }
       );
     },30);
+    */
+  }
+
+  animate = (from, to) => {
+    console.log("Called")
+    console.log(from,to)
+    this.state.animatedValue.setValue(from)
+    Animated.timing(
+      this.state.animatedValue,
+      {
+        toValue: to,
+        duration: 500
+      }
+    ).start(() => console.log("done"));
   }
 
   render() {
+    /*
     let shapes = [
       <Triangle height={100} width={100} top={200+this.state.move} left={40} key="1" />,
       <Triangle height={100} width={100} top={-400+this.state.move} left={40} key="2" />,
       <Rectangle height={100} width={100} top={-600+this.state.move} left={40} key="3"/>,
     ]
+    shapes.map((shape, index) => {
+      if(shape.props.top >Dimensions.get('screen').height){
+        shapes.splice(index,1)
+      }
+      if(shape.props.top < 0-shape.props.height){
+        shapes.splice(index,1)
+      }
+    });
+    console.log(shapes.length);
+    */
     return (
       <View style={styles.container}>
-        {shapes}
+        {/*shapes*/}
+        <Animated.Image style={{position: 'absolute', opacity: this.animate(0,1)}} source={require('../Media/YAMERO.jpg')}  />
         <Player position = {this.state.playerPosition} />
         <PlayerController />
       </View>

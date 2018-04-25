@@ -12,7 +12,6 @@ import Svg,{
 var {height, width} = Dimensions.get('window');
 
 export class Triangle extends Component{
-    
     render(){
         return(
             <Svg
@@ -34,17 +33,3 @@ export class Triangle extends Component{
         );
     }
 }
-
-/* const styles = StyleSheet.create({
-    triangleCorner: {
-        width: 0,
-        height: 0,
-        backgroundColor: 'transparent',
-        borderStyle: 'solid',
-        borderRightWidth: 100,
-        borderTopWidth: 100,
-        borderRightColor: 'transparent',
-        borderTopColor: 'red'
-      },
-})
-*/

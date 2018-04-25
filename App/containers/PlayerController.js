@@ -9,20 +9,8 @@ import { connect } from 'react-redux';
 import { updatePlayerPosition } from '../redux/actions';
 
 class PlayerControllerWrapper extends Component{
-
-    constructor(props){
-        super(props);
-        this.state = {
-            timesUpdated: 0,
-        }
-    }
-
     playerPosition = (value) => {
-        this.setState({
-            timesUpdated: this.state.timesUpdated++
-        })
         this.props.updatePlayerPosition(value);
-        console.log(this.state.timesUpdated);
     };
 
     render(){
