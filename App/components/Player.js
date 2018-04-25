@@ -8,33 +8,21 @@ import {
 } from 'react-native';
 
 export class Player extends Component{
-    constructor(props){
-        super(props);
-        this.state= {
-            health: 1,
-            score: 0,
-            size: 25,
-        }
-    }
-
-    move = (value) => {
-
-    };
     render(){
         return(
             <Svg 
                 style= {{
                     position: 'absolute',
-                    top:Dimensions.get('window').height-(this.state.size)*3,
+                    top:Dimensions.get('window').height-(this.props.size)*3,
                     left:this.props.position,
                 }}
-                height={this.state.size*2}
-                width={this.state.size*2}
+                height={this.props.size*2}
+                width={this.props.size*2}
             >
                 <Circle
-                    cx={this.state.size}
-                    cy={this.state.size}
-                    r={this.state.size}
+                    cx={this.props.size}
+                    cy={this.props.size}
+                    r={this.props.size}
                     fill="pink"
                 />
             </Svg>

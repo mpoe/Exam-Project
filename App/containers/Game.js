@@ -19,26 +19,32 @@ import {
 
 import { connect } from 'react-redux';
 
-import {Triangle} from './Triangle';
-import {Rectangle} from './Rectangle';
+import {Triangle} from '../components/Triangle';
+import {Rectangle} from '../components/Rectangle';
 
 import Svg from 'react-native-svg';
 
 
-import {Player} from './Player';
-import PlayerController from './PlayerController';
+import {Player} from '../components/Player';
+import {PlayerController} from '../components/PlayerController';
 
 import { player } from '../redux/reducers/player';
+
+import { updatePlayerPosition } from '../redux/actions';
 
 class GameWrapper extends Component {
   constructor(props){
     super(props);
     this.state = {
       move: 0,
-      animatedValue: new Animated.Value(0)
+      animatedValue: new Animated.Value(0),
+      playerHealth: 1,
+      playerSize: 25,
+      score: 0,
+      screenWidth: Dimensions.get('window').width,
     }
-    /*
-    var move = setInterval(() => {
+    
+    let move = setInterval(() => {
       this.setState( 
         {
           move: this.state.move+5,
@@ -46,12 +52,13 @@ class GameWrapper extends Component {
         }
       );
     },30);
-    */
   }
 
+  playerPosition = (value) => {
+    this.props.updatePlayerPosition(value);
+  };
+
   animate = (from, to) => {
-    console.log("Called")
-    console.log(from,to)
     this.state.animatedValue.setValue(from)
     Animated.timing(
       this.state.animatedValue,
@@ -69,6 +76,7 @@ class GameWrapper extends Component {
       <Triangle height={100} width={100} top={-400+this.state.move} left={40} key="2" />,
       <Rectangle height={100} width={100} top={-600+this.state.move} left={40} key="3"/>,
     ]
+    
     shapes.map((shape, index) => {
       if(shape.props.top >Dimensions.get('screen').height){
         shapes.splice(index,1)
@@ -81,17 +89,17 @@ class GameWrapper extends Component {
     */
     return (
       <View style={styles.container}>
-        {/*shapes*/}
-        <Animated.Image style={{position: 'absolute', opacity: this.animate(0,1)}} source={require('../Media/YAMERO.jpg')}  />
-        <Player position = {this.state.playerPosition} />
-        <PlayerController />
+        {/* shapes */}
+        {/*<Animated.Image style={{position: 'absolute', opacity: this.animate(1,0)}} source={require('../Media/YAMERO.jpg')}  />*/}
+        <Player position = {this.props.playerPosition} size={this.state.playerSize} />
+        <PlayerController playerPosition ={this.playerPosition} maxValue={this.state.playerSize*2} screenWidth={this.state.screenWidth} />
       </View>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return { playerPostion: state.player.position};
+  return { playerPosition: state.player.position};
 };
 
 const mapDispatchToProps = (dispatch) => {
