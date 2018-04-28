@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   Platform,
@@ -22,13 +16,8 @@ import { connect } from 'react-redux';
 import {Triangle} from '../components/Triangle';
 import {Rectangle} from '../components/Rectangle';
 
-import Svg from 'react-native-svg';
-
-
 import {Player} from '../components/Player';
 import {PlayerController} from '../components/PlayerController';
-
-import { player } from '../redux/reducers/player';
 
 import { updatePlayerPosition } from '../redux/actions';
 
@@ -43,11 +32,13 @@ class GameWrapper extends Component {
       score: 0,
       screenWidth: Dimensions.get('window').width,
     }
-    
+  }
+
+  componentDidMount(){
     let move = setInterval(() => {
       this.setState( 
         {
-          move: this.state.move+5,
+          move: this.state.move+3,
           playerPosition: this.props.playerPostion
         }
       );
@@ -69,28 +60,49 @@ class GameWrapper extends Component {
     ).start(() => console.log("done"));
   }
 
+  goto = () => {
+    console.log("Called")
+    this.props.navigation.navigate('Login');
+  }
+
+  stopGame = () => {
+    
+  }
+
   render() {
-    /*
     let shapes = [
       <Triangle height={100} width={100} top={200+this.state.move} left={40} key="1" />,
-      <Triangle height={100} width={100} top={-400+this.state.move} left={40} key="2" />,
+      <Triangle height={100} width={100} top={-400+this.state.move} left={81} key="2" />,
       <Rectangle height={100} width={100} top={-600+this.state.move} left={40} key="3"/>,
+      <Triangle height={100} width={100} top={-1200+this.state.move} left={40} key="4" />,
+      <Triangle height={100} width={100} top={-1400+this.state.move} left={81} key="5" />,
+      <Rectangle height={100} width={100} top={-1600+this.state.move} left={40} key="6"/>,
+      <Triangle height={100} width={100} top={-5200+this.state.move} left={40} key="7" />,
+      <Triangle height={100} width={100} top={-5400+this.state.move} left={81} key="8" />,
+      <Rectangle height={100} width={100} top={-5600+this.state.move} left={40} key="9"/>,
+      <Triangle height={100} width={100} top={-2200+this.state.move} left={40} key="10" />,
+      <Triangle height={100} width={100} top={-2400+this.state.move} left={81} key="12" />,
+      <Rectangle height={100} width={100} top={-2600+this.state.move} left={40} key="13"/>,
+      <Triangle height={100} width={100} top={-3200+this.state.move} left={40} key="11" />,
+      <Triangle height={100} width={100} top={-3400+this.state.move} left={81} key="112" />,
+      <Rectangle height={100} width={100} top={-3600+this.state.move} left={40} key="113"/>,
+      <Triangle height={100} width={100} top={-4200+this.state.move} left={40} key="111" />,
+      <Triangle height={100} width={100} top={-4400+this.state.move} left={81} key="1112" />,
+      <Rectangle height={100} width={100} top={-4600+this.state.move} left={40} key="11113"/>,
     ]
-    
-    shapes.map((shape, index) => {
-      if(shape.props.top >Dimensions.get('screen').height){
-        shapes.splice(index,1)
-      }
-      if(shape.props.top < 0-shape.props.height){
-        shapes.splice(index,1)
-      }
-    });
-    console.log(shapes.length);
-    */
     return (
       <View style={styles.container}>
-        {/* shapes */}
-        {/*<Animated.Image style={{position: 'absolute', opacity: this.animate(1,0)}} source={require('../Media/YAMERO.jpg')}  />*/}
+        {shapes}
+        {/* <Animated.Image style={{position: 'absolute', opacity: this.animate(1,0)}} source={require('../Media/YAMERO.jpg')}/> */}
+        <TouchableOpacity 
+          style={{
+            width:'100%',
+            height:50,
+          }}
+          onPress = {this.stopGame}
+        >
+          <View><Text>ASD</Text></View>
+        </TouchableOpacity>
         <Player position = {this.props.playerPosition} size={this.state.playerSize} />
         <PlayerController playerPosition ={this.playerPosition} maxValue={this.state.playerSize*2} screenWidth={this.state.screenWidth} />
       </View>
@@ -104,7 +116,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    //payload = position
+    //payload is the position of the player
     updatePlayerPosition: (payload) => dispatch(updatePlayerPosition(payload))
   };
 }
