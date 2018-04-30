@@ -31,68 +31,61 @@ class GameWrapper extends Component {
       playerSize: 25,
       score: 0,
       screenWidth: Dimensions.get('window').width,
+      renderedShapes: [],
     }
   }
 
   componentDidMount(){
-    let move = setInterval(() => {
+    this.setState({
+      shapes: [
+        <Triangle height={100} width={100} top={-105} left={40} key="1" />,
+        <Triangle height={100} width={100} top={-110} left={81} key="2" />,
+        <Rectangle height={100} width={100} top={-115} left={40} key="3"/>,
+        <Triangle height={100} width={100} top={-120} left={40} key="4" />,
+        <Triangle height={100} width={100} top={-125} left={81} key="5" />,
+        <Rectangle height={100} width={100} top={-130} left={40} key="6"/>,
+        <Triangle height={100} width={100} top={-140} left={40} key="7" />,
+        <Triangle height={100} width={100} top={-140} left={81} key="8" />,
+        <Rectangle height={100} width={100} top={-135} left={40} key="9"/>,
+        <Triangle height={100} width={100} top={-145} left={40} key="10" />,
+        <Triangle height={100} width={100} top={-145} left={81} key="12" />,
+        <Rectangle height={100} width={100} top={-2600} left={40} key="13"/>,
+        <Triangle height={100} width={100} top={-3200} left={40} key="11" />,
+        <Triangle height={100} width={100} top={-3400} left={81} key="112" />,
+        <Rectangle height={100} width={100} top={-3600} left={40} key="113"/>,
+        <Triangle height={100} width={100} top={-4200} left={40} key="111" />,
+        <Triangle height={100} width={100} top={-4400} left={81} key="1112" />,
+        <Rectangle height={100} width={100} top={-4600} left={40} key="11113"/>,
+      ]
+    })
+
+    let tick = setInterval(() => {
       this.setState( 
         {
-          move: this.state.move+3,
-          playerPosition: this.props.playerPostion
+          move: this.state.move+1,
         }
       );
-    },30);
+      this.state.shapes.map((shape, index) => {
+        let top = shape.props.top+this.state.move;
+        if(top == 0-shape.props.height){
+          this.state.renderedShapes.push(shape);
+        }
+      })
+    },100);
   }
 
   playerPosition = (value) => {
     this.props.updatePlayerPosition(value);
   };
 
-  animate = (from, to) => {
-    this.state.animatedValue.setValue(from)
-    Animated.timing(
-      this.state.animatedValue,
-      {
-        toValue: to,
-        duration: 500
-      }
-    ).start(() => console.log("done"));
-  }
-
   goto = () => {
-    console.log("Called")
     this.props.navigation.navigate('Login');
   }
 
-  stopGame = () => {
-    
-  }
-
   render() {
-    let shapes = [
-      <Triangle height={100} width={100} top={200+this.state.move} left={40} key="1" />,
-      <Triangle height={100} width={100} top={-400+this.state.move} left={81} key="2" />,
-      <Rectangle height={100} width={100} top={-600+this.state.move} left={40} key="3"/>,
-      <Triangle height={100} width={100} top={-1200+this.state.move} left={40} key="4" />,
-      <Triangle height={100} width={100} top={-1400+this.state.move} left={81} key="5" />,
-      <Rectangle height={100} width={100} top={-1600+this.state.move} left={40} key="6"/>,
-      <Triangle height={100} width={100} top={-5200+this.state.move} left={40} key="7" />,
-      <Triangle height={100} width={100} top={-5400+this.state.move} left={81} key="8" />,
-      <Rectangle height={100} width={100} top={-5600+this.state.move} left={40} key="9"/>,
-      <Triangle height={100} width={100} top={-2200+this.state.move} left={40} key="10" />,
-      <Triangle height={100} width={100} top={-2400+this.state.move} left={81} key="12" />,
-      <Rectangle height={100} width={100} top={-2600+this.state.move} left={40} key="13"/>,
-      <Triangle height={100} width={100} top={-3200+this.state.move} left={40} key="11" />,
-      <Triangle height={100} width={100} top={-3400+this.state.move} left={81} key="112" />,
-      <Rectangle height={100} width={100} top={-3600+this.state.move} left={40} key="113"/>,
-      <Triangle height={100} width={100} top={-4200+this.state.move} left={40} key="111" />,
-      <Triangle height={100} width={100} top={-4400+this.state.move} left={81} key="1112" />,
-      <Rectangle height={100} width={100} top={-4600+this.state.move} left={40} key="11113"/>,
-    ]
     return (
       <View style={styles.container}>
-        {shapes}
+        {this.state.renderedShapes}
         {/* <Animated.Image style={{position: 'absolute', opacity: this.animate(1,0)}} source={require('../Media/YAMERO.jpg')}/> */}
         <TouchableOpacity 
           style={{
