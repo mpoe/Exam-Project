@@ -13,7 +13,7 @@ import {
 
 import { connect } from 'react-redux';
 
-import {Triangle} from '../components/Triangle';
+import Triangle from '../components/Triangle';
 import {Rectangle} from '../components/Rectangle';
 
 import {Player} from '../components/Player';
@@ -38,7 +38,7 @@ class GameWrapper extends Component {
   componentDidMount(){
     this.setState({
       shapes: [
-        <Triangle height={100} width={100} top={-105} left={40} key="1" />,
+        <Triangle height={100} width={100} top={-105} left={40} key="1" points="40,5 70,80 25,95" />/* ,
         <Triangle height={100} width={100} top={-110} left={81} key="2" />,
         <Rectangle height={100} width={100} top={-115} left={40} key="3"/>,
         <Triangle height={100} width={100} top={-120} left={40} key="4" />,
@@ -55,7 +55,7 @@ class GameWrapper extends Component {
         <Rectangle height={100} width={100} top={-3600} left={40} key="113"/>,
         <Triangle height={100} width={100} top={-4200} left={40} key="111" />,
         <Triangle height={100} width={100} top={-4400} left={81} key="1112" />,
-        <Rectangle height={100} width={100} top={-4600} left={40} key="11113"/>,
+        <Rectangle height={100} width={100} top={-4600} left={40} key="11113"/>, */
       ]
     })
 
@@ -74,6 +74,11 @@ class GameWrapper extends Component {
     },100);
   }
 
+  playerGotHit = (source) => {
+    console.log("Hit! by")
+    console.log(source);
+  }
+
   playerPosition = (value) => {
     this.props.updatePlayerPosition(value);
   };
@@ -86,7 +91,6 @@ class GameWrapper extends Component {
     return (
       <View style={styles.container}>
         {this.state.renderedShapes}
-        {/* <Animated.Image style={{position: 'absolute', opacity: this.animate(1,0)}} source={require('../Media/YAMERO.jpg')}/> */}
         <TouchableOpacity 
           style={{
             width:'100%',
