@@ -14,6 +14,7 @@ import {
   } from 'react-native';
 
   import { connect } from 'react-redux';
+  import {FBLogin, FBLoginManager} from 'react-native-facebook-login';
 
  /*  import {LoginComp} from '../components/Login'
  */
@@ -35,11 +36,14 @@ import {
         },
         body: JSON.stringify({
           name: 'mpoe',
-          score: 20,
+          password: 20,
         }),
       })
       .then((response) => response.json())
       .then((responseJSON) => {
+        if(responseJSON.status == 400){
+          console.log(responseJSON.message)
+        }
         this.setState({
           name: responseJSON.name,
           score: responseJSON.score
@@ -60,6 +64,18 @@ import {
       console.log(this.state);
       return (
         <ScrollView>
+          <FBLogin
+            buttonView={<Text>Login with fb </Text>}
+            ref={(fbLogin) => { this.fbLogin = fbLogin }}
+            loginBehavior={FBLoginManager.LoginBehaviors.Native}
+            permissions={["email"]}
+            onLogin={function(e){console.log(e)}}
+            onLoginFound={function(e){console.log(e)}}
+            onLoginNotFound={function(e){console.log(e)}}
+            onLogout={function(e){console.log(e)}}
+            onCancel={function(e){console.log(e)}}
+            onPermissionsMissing={function(e){console.log(e)}}
+          />
           <Image style={{flex:1, resizeMode:'cover', maxWidth:'100%', justifyContent:'flex-start'}} source={require('../Media/portrait2.jpg')}/>
         </ScrollView>
       );
