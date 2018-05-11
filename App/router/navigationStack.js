@@ -6,7 +6,7 @@ import Login from '../containers/Login'
 
 export const AppNavigator = StackNavigator({
     Home: {
-        screen: Login,
+        screen: Game,
         navigationOptions: {
             tabBarVisible: false,
             header: null

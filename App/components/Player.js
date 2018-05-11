@@ -13,7 +13,7 @@ export class Player extends Component{
             <Svg 
                 style= {{
                     position: 'absolute',
-                    top:Dimensions.get('window').height-(this.props.size)*3,
+                    top:this.props.top,
                     left:this.props.position,
                 }}
                 height={this.props.size*2}

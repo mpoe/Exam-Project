@@ -25,6 +25,8 @@ import { updatePlayerPosition } from '../redux/actions';
 
 import {getTopscores} from '../api/'
 
+import {playerSize, playerTop} from '../constants/'
+
 class GameWrapper extends Component {
   constructor(props){
     super(props);
@@ -32,7 +34,7 @@ class GameWrapper extends Component {
       move: 0,
       animatedValue: new Animated.Value(0),
       playerHealth: 1,
-      playerSize: 25,
+      playerSize: playerSize,
       score: 0,
       screenWidth: Dimensions.get('window').width,
       renderedShapes: [],
@@ -49,7 +51,8 @@ class GameWrapper extends Component {
     this.setState({
       shapes: [
         <Triangle height={100} width={100} top={-105} left={40} key="1" points="40,5 70,80 25,95" /> /*,
-        <Triangle height={100} width={100} top={-110} left={81} key="2" />,
+        <Triangle height={100} width={100} top={-105} left={81} key="4" points="40,5 70,80 25,95"/>, /*,
+        <Triangle height={200} width={200} top={-110} left={81} key="2" points="0,5 70,80 150,95"/> ,
         <Rectangle height={100} width={100} top={-115} left={40} key="3"/>,
         <Triangle height={100} width={100} top={-120} left={40} key="4" />,
         <Triangle height={100} width={100} top={-125} left={81} key="5" />,
@@ -120,7 +123,7 @@ class GameWrapper extends Component {
         {this.state.renderedShapes}
         
         <View style={{marginTop: 22}}>
-          <Modal
+          {/*<Modal
             animationType="slide"
             transparent={false}
             visible={this.state.modalVisible}
@@ -145,18 +148,18 @@ class GameWrapper extends Component {
                 </TouchableOpacity>
               </View>
             </View>
-          </Modal>
+                </Modal>*/}
 
-          <TouchableOpacity
+          {/*<TouchableOpacity
             onPress={() => {
               this.setModalVisible(true);
               this.getTopscores({levelID:1});
             }}>
             <Text>Show Modal</Text>
-          </TouchableOpacity>
+          </TouchableOpacity>*/}
         </View>
 
-        <Player position = {this.props.playerPosition} size={this.state.playerSize} />
+        <Player position = {this.props.playerPosition} size={this.state.playerSize} top={playerTop}/>
         <PlayerController playerPosition ={this.playerPosition} maxValue={this.state.playerSize*2} screenWidth={this.state.screenWidth} />
       </View>
     );
@@ -164,7 +167,9 @@ class GameWrapper extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { playerPosition: state.player.position};
+  return { 
+    playerPosition: state.player.position,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
