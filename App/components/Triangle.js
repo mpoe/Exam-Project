@@ -33,7 +33,8 @@ class TriangleWrapper extends Component{
     }
 
     checkCollision = (value) => {
-        let points = this.props.points.split(/[\s,]/)
+        let points = this.props.points.replace(/,/g , ".");
+        points = this.props.points.split(/[\s]/)
         console.log(points)
         let triangleCoordinates = {
             x1: this.props.left+points[0],

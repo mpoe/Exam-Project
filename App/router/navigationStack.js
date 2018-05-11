@@ -13,6 +13,17 @@ export const AppNavigator = StackNavigator({
         }
     },
     Login: {
-        screen: Login
+        screen: Login,
+        navigationOptions: {
+            tabBarVisible: false,
+            header: null
+        }
+    },
+    Game: {
+        screen: Game,
+        navigationOptions: {
+            tabBarVisible: false,
+            header: null
+        }
     }
 })
