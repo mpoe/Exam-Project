@@ -4,21 +4,15 @@ import Game from '../containers/Game';
 import Login from '../containers/Login';
 import Welcome from '../containers/Welcome';
 import Register from '../containers/Register';
+import LevelSelection from '../containers/LevelSelection';
 
 
 export const AppNavigator = StackNavigator({
+    
     Welcome: {
         screen: Welcome,
         navigationOptions: {
             tabBarVisible: false,
-            header: null
-        },
-        portraitOnlyMode: true
-    },
-    Home: {
-        screen: Game,
-        navigationOptions: {
-            tabBarVisible: true,
             header: null
         },
         portraitOnlyMode: true
@@ -35,6 +29,14 @@ export const AppNavigator = StackNavigator({
         screen: Register,
         navigationOptions: {
             tabBarVisible: true,
+            header: null
+        },
+        portraitOnlyMode: true
+    },
+    LevelSelection: {
+        screen: LevelSelection,
+        navigationOptions: {
+            tabBarVisible: false,
             header: null
         },
         portraitOnlyMode: true

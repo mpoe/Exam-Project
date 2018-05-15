@@ -45,7 +45,7 @@ class WelcomeWrapper extends React.Component {
                         token: this.state.token,
                         facebookID: this.state.facebookID,
                     })
-                    this.props.navigation.navigate('Game');
+                    this.props.navigation.navigate('LevelSelection');
                 }
             })
             .catch((error) => {

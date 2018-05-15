@@ -50,7 +50,7 @@ class LoginWrapper extends Component {
                             index: 0,
                             key: null,
                             actions: [
-                                NavigationActions.navigate({ routeName: 'Game' })
+                                NavigationActions.navigate({ routeName: 'LevelSelection' })
                             ]
                         })
                     );
