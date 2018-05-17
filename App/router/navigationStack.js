@@ -8,7 +8,14 @@ import LevelSelection from '../containers/LevelSelection';
 
 
 export const AppNavigator = StackNavigator({
-    
+    StartScreen: {
+        screen:Game,
+        navigationOptions: {
+            tabBarVisible: false,
+            header: null
+        },
+        portraitOnlyMode: true
+    },    
     Welcome: {
         screen: Welcome,
         navigationOptions: {

@@ -5,7 +5,6 @@ import {
     Dimensions,
     Animated,
     Easing,
-    Text
 } from 'react-native';
 
 import Svg, {
@@ -19,7 +18,6 @@ import { playerSize, playerTop } from '../constants'
 var { height, width } = Dimensions.get('window');
 
 class TriangleWrapper extends Component {
-
     constructor(props) {
         super(props)
         this.dropValue = new Animated.Value(0);
@@ -31,7 +29,6 @@ class TriangleWrapper extends Component {
 
     componentDidMount() {
         this.drop()
-        console.log(this);
     }
 
     checkCollision = (value) => {
@@ -42,15 +39,15 @@ class TriangleWrapper extends Component {
         let triangleCoordinates = [
             {
                 x: parseInt(this.props.left) + parseInt(points[0]),
-                y: parseInt(value) + parseInt(points[1]) + this.props.top,
+                y: parseInt(value) + parseInt(points[1]) - this.props.height,
             },
             {
                 x: parseInt(this.props.left) + parseInt(points[2]),
-                y: parseInt(value) + parseInt(points[3]) + this.props.top,
+                y: parseInt(value) + parseInt(points[3]) - this.props.height,
             },
             {
                 x: parseInt(this.props.left) + parseInt(points[4]),
-                y: parseInt(value) + parseInt(points[5]) + this.props.top,
+                y: parseInt(value) + parseInt(points[5]) - this.props.height,
             }
         ]
         let playerCoordinates = {
@@ -82,15 +79,7 @@ class TriangleWrapper extends Component {
                         return;
                     } else {
                         //HIT
-                        console.log(dist);
-                        console.log("NEAR -- x: " + nearestX + " y: " + nearestY)
-                        console.log("CIRCLE -- x: " + playerCoordinates.centerX + " y: " + playerCoordinates.centerY)
-                        console.log("point1: x: " + point.x + " y: " + point.y)
-                        console.log("point2: x: " + point2.x + " y: " + point2.y)
-                        console.log("hit!");
-                        console.log(value);
-                        console.log(this.props.top);
-                        console.log(t);
+                        this.props.playerGotHit(this);
                     }
                 }
             })
@@ -128,7 +117,7 @@ class TriangleWrapper extends Component {
             <Animated.View
                 style={{
                     transform: [{ translateY: drop }],
-                    top: this.props.top,
+                    top: -this.props.height,
                     left: this.props.left,
                     position: 'absolute',
                 }}
