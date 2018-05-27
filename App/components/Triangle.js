@@ -59,7 +59,6 @@ class TriangleWrapper extends Component {
         triangleCoordinates.map((point) => {
             triangleCoordinates.map((point2) => {
                 let dX = point.x - point2.x;
-                //bY                        //aY
                 let dY = point.y - point2.y;
                 if (dX == 0 && dY == 0) {
                     // A and B are the same points, no way to calculate intersection

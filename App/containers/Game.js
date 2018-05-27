@@ -50,6 +50,8 @@ class GameWrapper extends Component {
 	componentDidMount() {
 		this.setState({
 			shapes: [
+				<Rectangle width={300} height={100} delay={50} left={0} key="1" playerGotHit={this.playerGotHit}/>,
+				<Rectangle width={300} height={100} delay={100} left={50} key="2" playerGotHit={this.playerGotHit}/> /*
 				//Triangles height and width = to the highest value of the points prop, can be extracted in the future?
 				<Triangle height={95} width={70} delay={1} left={40} key="1" points="40,5 70,80 25,95" playerGotHit={this.playerGotHit}/> ,
 				<Rectangle height={100} width={100} delay={5} left={140} key="3" playerGotHit={this.playerGotHit}/>,
