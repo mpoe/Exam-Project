@@ -19,6 +19,7 @@ export class Player extends Component{
             invulnerable: false,
             shouldAnimate: false,
             animatedTimes: 0,
+            timesToAnimate: 7,
         }
         this.opacityValue = new Animated.Value(1);
         this.opacityValue.addListener(({ value }) => {
@@ -33,19 +34,10 @@ export class Player extends Component{
             this.opacityValue,
             {
                 toValue: 1,
-                duration: invulnerabilityTime/7,
+                duration: invulnerabilityTime,
                 easing: Easing.bezier(.45,1.79,.51,-1)
             }
-        ).start(() => {
-            this.setState({
-                animatedTimes : this.state.animatedTimes+1,
-            })
-            if(this.state.animatedTimes == 7){
-                this.opacityValue.removeListener
-            }else{
-                this.animate();
-            }
-        })
+        ).start()
     }
 
     componentDidUpdate(){

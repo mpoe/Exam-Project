@@ -50,7 +50,7 @@ class GameWrapper extends Component {
 	componentDidMount() {
 		this.setState({
 			shapes: [
-				<Rectangle width={300} height={100} delay={50} left={0} key="1" playerGotHit={this.playerGotHit}/>,
+				/*<Rectangle width={300} height={100} delay={50} left={0} key="1" playerGotHit={this.playerGotHit}/>,
 				<Rectangle width={300} height={100} delay={100} left={50} key="2" playerGotHit={this.playerGotHit}/> /*
 				//Triangles height and width = to the highest value of the points prop, can be extracted in the future?
 				<Triangle height={95} width={70} delay={1} left={40} key="1" points="40,5 70,80 25,95" playerGotHit={this.playerGotHit}/> ,
@@ -83,11 +83,22 @@ class GameWrapper extends Component {
 				}
 			);
 			this.state.shapes.map((shape, index) => {
-				let top = shape.props.top + this.state.move;
 				if (shape.props.delay == this.state.move) {
 					this.state.renderedShapes.push(shape);
 				}
 			})
+			//Handle left side spawning
+			if((this.state.move-50) %100 == 0){
+				this.state.renderedShapes.push(
+					<Rectangle width={300} height={100} left={0} key={"abc"+this.state.move} playerGotHit={this.playerGotHit}/>
+				)
+			}
+			//Handle right side spawning
+			if((this.state.move-100) %100 == 0){
+				this.state.renderedShapes.push(
+					<Rectangle width={300} height={100} left={75} key={"abc"+this.state.move} playerGotHit={this.playerGotHit}/>
+				)
+			}
 		}, 100);
 	}
 
